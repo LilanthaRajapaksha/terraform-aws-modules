@@ -6,10 +6,13 @@
 resource "aws_s3_bucket" "s3_bucket" {
   bucket = var.bucket_name
 
-  tags = {
-    Name        = var.bucket_name
-    Description = var.bucket_description
-    User        = split("/", data.aws_caller_identity.current_user.arn)[1]
-    Terraform   = true
-  }
+  tags = merge(
+    {
+      Name        = var.bucket_name
+      Description = var.bucket_description
+      Owner       = split("/", data.aws_caller_identity.current_user.arn)[1]
+      Terraform   = true
+    },
+    var.custom_tags != null ? var.custom_tags : {}
+  )
 }

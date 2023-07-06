@@ -7,3 +7,9 @@ variable "bucket_description" {
   type        = string
   description = "The description of the bucket"
 }
+
+variable "custom_tags" {
+  description = "Tags for the S3 bucket"
+  type        = map(string)
+  default     = null
+}
