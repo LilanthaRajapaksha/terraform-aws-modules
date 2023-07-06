@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "s3_bucket" {
 
   tags = {
     Name        = var.bucket_name
-    Description = var.description
+    Description = var.bucket_description
     User        = split("/", data.aws_caller_identity.current_user.arn)[1]
     Terraform   = true
   }
